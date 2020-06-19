@@ -5,7 +5,7 @@ getwd()
 African_names <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-06-16/african_names.csv")
 
 freed.rodeur <- African_names %>% 
-  filter(port_disembark=="Freetown", ship_name== "Rôdeur") %>% 
+  filter(port_disembark=="Freetown", ship_name== "RÃ´deur") %>% 
   mutate(Gender = ifelse(gender == "Man", "Male",
                          if_else(gender=="Boy", "Male",
                                  if_else(gender=="Woman", "Female", "Female"))))
@@ -19,7 +19,7 @@ graph_data <- ggplot2::ggplot(data = freed.rodeur, mapping = aes(x = forcats::fc
   scale_y_continuous(breaks = seq(0,10,1),
                      expand = c(0,1))+
   
-  labs(title = "Individuals Freed Using Rôdeur Ship Who had Disembarked from Freetown",
+  labs(title = "Individuals Freed Using RÃ´deur Ship Who had Disembarked from Freetown",
        subtitle = "Distributed by Gender",
        x = "Gender",
        y = "Number of Rescued Individuals",
@@ -28,14 +28,13 @@ graph_data <- ggplot2::ggplot(data = freed.rodeur, mapping = aes(x = forcats::fc
   theme(panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
         panel.grid.minor.y = element_blank(),
-        legend.position = "right",
+        legend.position = "top",
         legend.spacing.x = unit(0.3, "cm"),
         legend.title = element_blank(),
         legend.text = element_text(size = 10))+
   
-  scale_fill_brewer(palette = "Dark2")+
+  scale_fill_brewer(palette = "Dark2")
   
-  theme_grey()
-graph_data
+ graph_data
 
 ggsave("rescued.png")
